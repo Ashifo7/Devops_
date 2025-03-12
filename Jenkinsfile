@@ -1,7 +1,10 @@
 pipeline {
     agent any
+    tools {
+        maven 'Maven-3.9.9'  // Use the exact name set in Jenkins
+    }
     environment {
-        DOCKER_CREDENTIALS_ID = 'docker-hub-credentials' // Your credential ID
+        DOCKER_CREDENTIALS_ID = 'docker-hub-credentials' // Your Jenkins Docker credentials ID
         IMAGE_NAME = 'ashif321/my-app'
         IMAGE_TAG = 'latest'
     }
@@ -9,7 +12,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh 'mvn clean package' // Builds the Java app
+                    sh 'mvn clean package' // Use Maven to build Java app
                 }
             }
         }
